@@ -1,0 +1,26 @@
+#pragma once
+
+#ifndef _TWIO_MACROS_H_
+#define _TWIO_MACROS_H_
+
+#define TWIO_VERSION   "1.0.0"
+#define TWIO_PROJ_NAME "Tiny Wrapped Input/Output"
+
+#define TWIO_BEGIN namespace twio {
+#define TWIO_END   }
+#define TWIO       ::twio::
+
+#ifdef _WIN32
+#define _TWIO_FOR_WIN32 1
+#else
+#define _TWIO_FOR_WIN32 0
+#endif
+
+#ifdef ENABLE_ASSERT
+#include <cassert>
+#define TWIO_ASSERT(...) assert(__VA_ARGS__)
+#else
+#define TWIO_ASSERT(...)
+#endif
+
+#endif // _TWIO_MACROS_H_
