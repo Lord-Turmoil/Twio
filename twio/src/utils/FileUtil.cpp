@@ -62,5 +62,4 @@ bool IsWriteOnly(FILE* fp)
 #endif
 
 
-
 TWIO_END

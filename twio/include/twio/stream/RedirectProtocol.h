@@ -32,6 +32,7 @@ struct RedirectRequest
     }
 
     RedirectRequest(RedirectRequest& other) = delete;
+
     RedirectRequest(RedirectRequest&& other) noexcept
     {
         protocol = other.protocol;
@@ -39,6 +40,7 @@ struct RedirectRequest
     }
 
     RedirectRequest& operator=(RedirectRequest& other) = delete;
+
     RedirectRequest& operator=(RedirectRequest&& other) noexcept
     {
         // Avoid self assignment!

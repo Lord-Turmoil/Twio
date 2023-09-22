@@ -3,7 +3,6 @@
 
 #include <twio/core/IReader.h>
 #include <twio/core/ReaderBuffer.h>
-#include <twio/stream/RedirectProtocol.h>
 #include <twio/stream/IStream.h>
 
 #include <memory>

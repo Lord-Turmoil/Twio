@@ -15,7 +15,6 @@ BufferInputStream::BufferInputStream(const char* buffer, size_t size)
     _buffer = std::make_unique<char[]>(TWIO_ALIGN_8(_size));
 
     memcpy(_buffer.get(), buffer, size);
-
 }
 
 BufferInputStream::BufferInputStream(const char* buffer) : _next(0)
