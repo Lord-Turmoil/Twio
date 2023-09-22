@@ -28,8 +28,8 @@ class IAdvancedReader : public IReader
 public:
     ~IAdvancedReader() override = 0;
 
-    virtual int Line() const;
-    virtual int Char() const;
+    virtual int Line() const = 0;
+    virtual int Char() const = 0;
 };
 
 inline IAdvancedReader::~IAdvancedReader() = default;

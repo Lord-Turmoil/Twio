@@ -3,26 +3,27 @@
 
 #include <cstdio>
 
+#include "twio/core/AdvancedReader.h"
 #include "twio/core/Writer.h"
 #include "twio/stream/FileOutputStream.h"
 #include "twio/utils/Printer.h"
 
-const char BUFFER[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const char BUFFER[] = "ABC\nDEFGHI\nJKLMNOPQR\nSTUVWXYZ\n";
 
 int main()
 {
     const auto inputStream = twio::BufferInputStream::New(BUFFER);
-    const auto reader = twio::Reader::New(inputStream);
+    const auto reader = twio::AdvancedReader::New(inputStream);
 
     int ch;
     while ((ch = reader->Read()) != EOF)
     {
-        putchar(ch);
+        printf("%c - Ln: %d, Ch: %d\n", ch, reader->Line(), reader->Char());
     }
     putchar('\n');
     while ((ch = reader->Rewind()) > 0)
     {
-        putchar(ch);
+        printf("%c - Ln: %d, Ch: %d\n", ch, reader->Line(), reader->Char());
     }
     putchar('\n');
 

@@ -8,6 +8,7 @@
 
 TWIO_BEGIN
 
+
 class Writer : public IWriter
 {
 public:
