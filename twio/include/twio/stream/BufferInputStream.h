@@ -40,10 +40,6 @@ public:
     int Read() override;
 
 private:
-    // Make size to be a multiple of 8.
-    size_t _Align8(size_t size);
-
-private:
     std::unique_ptr<char[]> _buffer;
     size_t _size;
     size_t _next;
