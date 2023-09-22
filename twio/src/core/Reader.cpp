@@ -61,4 +61,9 @@ int Reader::Rewind()
     return _Pop();
 }
 
+IInputStreamPtr Reader::Stream() const
+{
+    return _stream;
+}
+
 TWIO_END

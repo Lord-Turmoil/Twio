@@ -28,6 +28,8 @@ public:
     int Line() const override;
     int Char() const override;
 
+    IInputStreamPtr Stream() const override;
+
 private:
     void _MoveForward(char ch);
     void _MoveBackward(char ch);

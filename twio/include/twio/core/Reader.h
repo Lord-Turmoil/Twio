@@ -24,6 +24,8 @@ public:
 
     int Rewind() override;
 
+    IInputStreamPtr Stream() const override;
+
 private:
     IInputStreamPtr _stream;
 };

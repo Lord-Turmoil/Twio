@@ -29,4 +29,9 @@ size_t Writer::Write(char ch)
     return _stream->Write(ch);
 }
 
+IOutputStreamPtr Writer::Stream() const
+{
+    return _stream;
+}
+
 TWIO_END

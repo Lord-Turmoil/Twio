@@ -81,6 +81,11 @@ int AdvancedReader::Char() const
     return _charNo;
 }
 
+IInputStreamPtr AdvancedReader::Stream() const
+{
+    return _stream;
+}
+
 // Currently will ignore '\r'.
 void AdvancedReader::_MoveForward(char ch)
 {

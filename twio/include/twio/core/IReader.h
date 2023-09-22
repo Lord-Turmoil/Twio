@@ -2,6 +2,7 @@
 #define _TWIO_IREADER_H_
 
 #include <twio/Macros.h>
+#include <twio/stream/IStream.h>
 #include <memory>
 
 TWIO_BEGIN
@@ -16,6 +17,8 @@ public:
     virtual int Read() = 0;
 
     virtual int Rewind() = 0;
+
+    virtual IInputStreamPtr Stream() const = 0;
 };
 
 inline IReader::~IReader() = default;

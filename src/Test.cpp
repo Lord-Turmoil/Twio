@@ -36,7 +36,11 @@ int main()
 
     printf("========================================\n");
 
-    inputStream = twio::BufferInputStream::New(outputStream->Yield());
+    inputStream = twio::BufferInputStream::New(writer->Stream()->Yield());
+
+    // Error! Not ready
+    // writer->Write("Hello");
+
     advancedReader = twio::AdvancedReader::New(inputStream);
     while ((ch = advancedReader->Read()) != EOF)
     {
