@@ -24,6 +24,7 @@
 #endif
 
 // Align size to 8 bytes.
-#define TWIO_ALIGN(size) (((size) + 7) & ~7)
+#define TWIO_ALIGN_8(size) (((size) + 7) & ~7)
+#define TWIO_ALIGN(size, align) (((size) + ((align) - 1)) & ~((align) - 1))
 
 #endif // _TWIO_MACROS_H_

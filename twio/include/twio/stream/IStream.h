@@ -40,10 +40,10 @@ public:
     ~IOutputStream() override {}
 
     // Write up to 'size' characters from the buffer to the stream.
-    virtual int Write(const char* buffer, int size) = 0;
+    virtual size_t Write(const char* buffer, size_t size) = 0;
 
     // Write one character to the stream.
-    virtual int Write(char ch) = 0;
+    virtual size_t Write(char ch) = 0;
 };
 
 

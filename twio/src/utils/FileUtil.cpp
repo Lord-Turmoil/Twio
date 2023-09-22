@@ -14,13 +14,21 @@ namespace util
     {
         FILE* fp;
 
-        int ret = fopen_s(&fp, path, mode);
+        const int ret = fopen_s(&fp, path, mode);
         if (ret != 0)
         {
             return nullptr;
         }
 
         return fp;
+    }
+
+    void CloseFile(FILE* fp)
+    {
+        if (fp != nullptr)
+        {
+            TWIO_ASSERT(fclose(fp));
+        }
     }
 
 #if _TWIO_FOR_WIN32
@@ -40,7 +48,7 @@ namespace util
 #endif
 
 #if _TWIO_FOR_WIN32
-    bool IsWriteOnly(FILE* Fp)
+    bool IsWriteOnly(FILE* fp)
     {
         // :(
         return true;
