@@ -1,3 +1,5 @@
+// Copyright (C) 2018 - 2023 Tony's Studio. All rights reserved.
+
 #pragma once
 
 #ifndef _TWIO_BUFFER_INPUT_STREAM_H_
