@@ -48,7 +48,9 @@ bool FileInputStream::IsReady() const
 size_t FileInputStream::Read(char* buffer, size_t size)
 {
     TWIO_ASSERT(!IsReady());
-    return fread(buffer, sizeof(char), size, _fp);
+    const size_t count = fread(buffer, sizeof(char), size, _fp);
+    buffer[count] = '\0';
+    return count;
 }
 
 size_t FileInputStream::Read(char* buffer)

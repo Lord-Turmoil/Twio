@@ -64,6 +64,7 @@ size_t BufferInputStream::Read(char* buffer, size_t size)
     }
 
     memcpy(buffer, _buffer.get() + _next, size);
+    buffer[size] = '\0';
 
     return size;
 }
