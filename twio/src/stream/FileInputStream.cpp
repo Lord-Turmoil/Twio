@@ -21,6 +21,11 @@ FileInputStream::FileInputStream(const char* path)
     _takeOver = true;
 }
 
+std::shared_ptr<FileInputStream> New(FILE* fp, bool takeOver)
+{
+    return std::make_shared<FileInputStream>(fp, takeOver);
+}
+
 FileInputStream::~FileInputStream()
 {
     Close();

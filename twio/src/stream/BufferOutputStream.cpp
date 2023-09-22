@@ -11,6 +11,11 @@ BufferOutputStream::BufferOutputStream(size_t size)
     _next = 0;
 }
 
+std::shared_ptr<BufferOutputStream> New(size_t size)
+{
+    return std::make_shared<BufferOutputStream>(size);
+}
+
 BufferOutputStream::~BufferOutputStream()
 {
     Close();

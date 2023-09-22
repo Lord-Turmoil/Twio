@@ -26,6 +26,16 @@ BufferInputStream::BufferInputStream(const char* buffer)
     memcpy(_buffer.get(), buffer, size);
 }
 
+std::shared_ptr<BufferInputStream> BufferInputStream::New(const char* buffer, size_t size)
+{
+    return std::make_shared<BufferInputStream>(buffer, size);
+}
+
+std::shared_ptr<BufferInputStream> BufferInputStream::New(const char* buffer)
+{
+    return std::make_shared<BufferInputStream>(buffer);
+}
+
 BufferInputStream::~BufferInputStream()
 {
     Close();

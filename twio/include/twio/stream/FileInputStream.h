@@ -5,6 +5,7 @@
 
 #include <twio/stream/IStream.h>
 #include <cstdio>
+#include <memory>
 
 TWIO_BEGIN
 
@@ -30,6 +31,8 @@ public:
     // Ensure the file is closed.
     ~FileInputStream() override;
 
+    static std::shared_ptr<FileInputStream> New(FILE* fp, bool takeOver = true);
+
 public:
     // Manually close the file.
     void Close() override;
@@ -45,6 +48,8 @@ private:
     FILE* _fp;
     bool _takeOver;
 };
+
+using FileInputStreamPtr = std::shared_ptr<FileInputStream>;
 
 
 TWIO_END

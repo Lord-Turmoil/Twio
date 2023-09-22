@@ -6,6 +6,7 @@
 #include <twio/Macros.h>
 #include <twio/stream/IStream.h>
 #include <cstdio>
+#include <memory>
 
 TWIO_BEGIN
 
@@ -30,6 +31,8 @@ public:
     // Ensure the file is closed.
     ~FileOutputStream() override;
 
+    static std::shared_ptr<FileOutputStream> New(FILE* fp, bool takeOver = true);
+
 public:
     // Manually close the file.
     void Close() override;
@@ -45,6 +48,7 @@ private:
     bool _takeOver;
 };
 
+using FileOutputStreamPtr = std::shared_ptr<FileOutputStream>;
 
 TWIO_END
 

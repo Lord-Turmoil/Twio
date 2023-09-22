@@ -28,6 +28,9 @@ public:
 
     ~BufferInputStream() override;
 
+    static std::shared_ptr<BufferInputStream> New(const char* buffer, size_t size);
+    static std::shared_ptr<BufferInputStream> New(const char* buffer);
+
 public:
     // Close the buffer input means free the memory.
     void Close() override;
@@ -44,6 +47,8 @@ private:
     size_t _size;
     size_t _next;
 };
+
+using BufferInputStreamPtr = std::shared_ptr<BufferInputStream>;
 
 
 TWIO_END

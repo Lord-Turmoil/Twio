@@ -21,6 +21,11 @@ FileOutputStream::FileOutputStream(const char* path)
     _takeOver = true;
 }
 
+std::shared_ptr<FileOutputStream> New(FILE* fp, bool takeOver)
+{
+    return std::make_shared<FileOutputStream>(fp, takeOver);
+}
+
 FileOutputStream::~FileOutputStream()
 {
     Close();

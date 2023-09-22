@@ -23,6 +23,8 @@ public:
 
     ~BufferOutputStream() override;
 
+    static std::shared_ptr<BufferOutputStream> New(size_t size = DEFAULT_BUFFER_SIZE);
+
 public:
     void Close() override;
     bool IsReady() const override;
@@ -40,6 +42,8 @@ private:
     size_t _size;
     size_t _next;
 };
+
+using BufferOutputStreamPtr = std::shared_ptr<BufferOutputStream>;
 
 
 TWIO_END

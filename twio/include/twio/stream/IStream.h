@@ -4,6 +4,7 @@
 #define _TWIO_STREAM_H_
 
 #include <twio/Macros.h>
+#include <memory>
 
 TWIO_BEGIN
 
@@ -46,6 +47,9 @@ public:
     virtual size_t Write(char ch) = 0;
 };
 
+
+using IInputStreamPtr = std::shared_ptr<IInputStream>;
+using IOutputStreamPtr = std::shared_ptr<IOutputStream>;
 
 TWIO_END
 
