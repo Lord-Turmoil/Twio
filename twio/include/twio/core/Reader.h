@@ -12,10 +12,10 @@ TWIO_BEGIN
 class Reader final : public IReader, public ReaderBuffer
 {
 public:
-    Reader(IInputStreamPtr stream);
+    explicit Reader(IInputStreamPtr stream);
     ~Reader() override;
 
-    static std::shared_ptr<Reader> New(IInputStreamPtr stream);
+    static std::shared_ptr<Reader> New(const IInputStreamPtr& stream);
 
     size_t Read(char* buffer, size_t size) override;
     int Read() override;

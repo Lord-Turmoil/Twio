@@ -30,6 +30,7 @@ public:
     bool IsReady() const override;
 
     size_t Write(const char* buffer, size_t size) override;
+    size_t Write(const char* buffer) override;
     size_t Write(char ch) override;
 
 private:

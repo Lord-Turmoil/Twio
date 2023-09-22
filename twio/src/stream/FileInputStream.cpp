@@ -8,12 +8,12 @@ FileInputStream::FileInputStream(FILE* fp, bool takeOver)
     : _fp(fp), _takeOver(takeOver)
 {
     TWIO_ASSERT(_fp);
-    TWIO_ASSERT(!utils::IsReadOnly(_fp));
+    TWIO_ASSERT(!IsReadOnly(_fp));
 }
 
 FileInputStream::FileInputStream(const char* path)
 {
-    _fp = utils::OpenFile(path, "r");
+    _fp = OpenFile(path, "r");
 
     // _fp must not be null
     TWIO_ASSERT(_fp);
@@ -35,7 +35,7 @@ void FileInputStream::Close()
 {
     if (_fp)
     {
-        utils::CloseFile(_fp);
+        CloseFile(_fp);
         _fp = nullptr;
     }
 }

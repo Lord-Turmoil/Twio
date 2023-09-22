@@ -8,15 +8,13 @@
 
 TWIO_BEGIN
 
-namespace utils
-{
-    FILE* OpenFile(const char* path, const char* mode);
-    void CloseFile(FILE* fp);
-    
-    // Check file access control.
-    bool IsReadOnly(FILE* fp);
-    bool IsWriteOnly(FILE* fp);
-};
+
+FILE* OpenFile(const char* path, const char* mode);
+void CloseFile(FILE* fp);
+
+// Check file access control.
+bool IsReadOnly(FILE* fp);
+bool IsWriteOnly(FILE* fp);
 
 
 TWIO_END

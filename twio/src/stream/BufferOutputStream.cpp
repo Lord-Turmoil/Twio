@@ -49,6 +49,15 @@ size_t BufferOutputStream::Write(const char* buffer, size_t size)
     return size;
 }
 
+size_t BufferOutputStream::Write(const char* buffer)
+{
+    TWIO_ASSERT(IsReady());
+
+    const size_t size = strlen(buffer);
+
+    return Write(buffer, size);
+}
+
 size_t BufferOutputStream::Write(char ch)
 {
     TWIO_ASSERT(IsReady());

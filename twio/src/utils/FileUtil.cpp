@@ -8,61 +8,59 @@
 
 TWIO_BEGIN
 
-namespace util
+FILE* OpenFile(const char* path, const char* mode)
 {
-    FILE* OpenFile(const char* path, const char* mode)
+    FILE* fp;
+
+    const int ret = fopen_s(&fp, path, mode);
+    if (ret != 0)
     {
-        FILE* fp;
-
-        const int ret = fopen_s(&fp, path, mode);
-        if (ret != 0)
-        {
-            return nullptr;
-        }
-
-        return fp;
+        return nullptr;
     }
 
-    void CloseFile(FILE* fp)
+    return fp;
+}
+
+void CloseFile(FILE* fp)
+{
+    if (fp != nullptr)
     {
-        if (fp != nullptr)
-        {
-            TWIO_ASSERT(fclose(fp));
-        }
+        TWIO_ASSERT(fclose(fp) == 0);
     }
+}
 
 #if _TWIO_FOR_WIN32
-    bool IsReadOnly(FILE* fp)
-    {
-        // :(
-        return true;
-    }
+bool IsReadOnly(FILE* fp)
+{
+    // :(
+    return true;
+}
 #else
-    bool IsReadOnly(FILE* fp)
-    {
-        int fd = fileno(file);
-        int mode = fcntl(fd, F_GETFL);
+bool IsReadOnly(FILE* fp)
+{
+    int fd = fileno(file);
+    int mode = fcntl(fd, F_GETFL);
 
-        return mode == 32768;
-    }
+    return mode == 32768;
+}
 #endif
 
 #if _TWIO_FOR_WIN32
-    bool IsWriteOnly(FILE* fp)
-    {
-        // :(
-        return true;
-    }
+bool IsWriteOnly(FILE* fp)
+{
+    // :(
+    return true;
+}
 #else
-    bool IsWriteOnly(FILE* fp)
-    {
-        int fd = fileno(file);
-        int mode = fcntl(fd, F_GETFL);
+bool IsWriteOnly(FILE* fp)
+{
+    int fd = fileno(file);
+    int mode = fcntl(fd, F_GETFL);
 
-        return mode == 32769;
-    }
+    return mode == 32769;
+}
 #endif
-};
+
 
 
 TWIO_END

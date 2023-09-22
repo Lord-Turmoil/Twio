@@ -3,12 +3,12 @@
 TWIO_BEGIN
 
 
-Reader::Reader(IInputStreamPtr stream) : _stream(stream)
+Reader::Reader(IInputStreamPtr stream) : _stream(std::move(stream))
 {
-    TWIO_ASSERT(stream != nullptr);
+    TWIO_ASSERT(_stream != nullptr);
 }
 
-std::shared_ptr<Reader> Reader::New(IInputStreamPtr stream)
+std::shared_ptr<Reader> Reader::New(const IInputStreamPtr& stream)
 {
     return std::make_shared<Reader>(stream);
 }
@@ -19,7 +19,7 @@ size_t Reader::Read(char* buffer, size_t size)
 {
     TWIO_ASSERT(buffer != nullptr);
 
-    size_t bufferRead = 0;
+    const size_t bufferRead = 0;
     while (bufferRead < size && _HasNext())
     {
         *(buffer++) = _Get();
@@ -33,8 +33,8 @@ size_t Reader::Read(char* buffer, size_t size)
     }
 
     // Buffer is empty now.
-    size_t remain = size - bufferRead;
-    size_t streamRead = _stream->Read(buffer, remain);
+    const size_t remain = size - bufferRead;
+    const size_t streamRead = _stream->Read(buffer, remain);
     _Push(buffer, streamRead);
 
     return bufferRead + streamRead;
@@ -47,7 +47,7 @@ int Reader::Read()
         return _Get();
     }
 
-    int ch = _stream->Read();
+    const int ch = _stream->Read();
     if (ch != EOF)
     {
         _Push(ch);

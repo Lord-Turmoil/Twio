@@ -1,0 +1,26 @@
+#pragma once
+
+#ifndef _TWIO_IPRINTER_H_
+#define _TWIO_IPRINTER_H_
+
+#include <twio/Macros.h>
+#include <memory>
+
+TWIO_BEGIN
+
+
+class IPrinter
+{
+public:
+    virtual ~IPrinter() = 0;
+
+    virtual void Print() = 0;
+};
+
+inline IPrinter::~IPrinter() = default;
+
+using IPrinterPtr = std::shared_ptr<IPrinter>;
+
+TWIO_END
+
+#endif // _TWIO_IPRINTER_H_

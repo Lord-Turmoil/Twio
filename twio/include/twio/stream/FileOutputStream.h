@@ -32,6 +32,7 @@ public:
     ~FileOutputStream() override;
 
     static std::shared_ptr<FileOutputStream> New(FILE* fp, bool takeOver = true);
+    static std::shared_ptr<FileOutputStream> New(const char* path);
 
 public:
     // Manually close the file.
@@ -41,6 +42,7 @@ public:
     bool IsReady() const override;
 
     size_t Write(const char* buffer, size_t size) override;
+    size_t Write(const char* buffer) override;
     size_t Write(char ch) override;
 
 private:
