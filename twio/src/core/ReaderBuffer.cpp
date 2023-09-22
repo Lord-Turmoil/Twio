@@ -48,11 +48,9 @@ int ReaderBuffer::_Pop()
     {
         return -1;
     }
-    else
-    {
-        _current--;
-        return _buffer[_SCALE_TO_READER_BUFFER_SIZE(_current)];
-    }
+
+    _current--;
+    return _buffer[_SCALE_TO_READER_BUFFER_SIZE(_current)];
 }
 
 int ReaderBuffer::_Get()
@@ -61,12 +59,10 @@ int ReaderBuffer::_Get()
     {
         return -1;
     }
-    else
-    {
-        int ret = _buffer[_SCALE_TO_READER_BUFFER_SIZE(_current)];
-        _current++;
-        return ret;
-    }
+
+    int ret = _buffer[_SCALE_TO_READER_BUFFER_SIZE(_current)];
+    _current++;
+    return ret;
 }
 
 TWIO_END

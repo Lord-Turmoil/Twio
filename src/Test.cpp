@@ -7,16 +7,16 @@ const char BUFFER[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 int main()
 {
-    auto stream = twio::BufferInputStream::New(BUFFER);
-    auto reader = twio::Reader(stream);
+    const auto stream = twio::BufferInputStream::New(BUFFER);
+    const auto reader = twio::Reader::New(stream);
 
     int ch;
-    while ((ch = reader.Read()) != EOF)
+    while ((ch = reader->Read()) != EOF)
     {
         putchar(ch);
     }
     putchar('\n');
-    while ((ch = reader.Rewind()) > 0)
+    while ((ch = reader->Rewind()) > 0)
     {
         putchar(ch);
     }

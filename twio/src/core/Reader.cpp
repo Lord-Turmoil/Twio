@@ -8,6 +8,11 @@ Reader::Reader(IInputStreamPtr stream) : _stream(stream)
     TWIO_ASSERT(stream != nullptr);
 }
 
+std::shared_ptr<Reader> Reader::New(IInputStreamPtr stream)
+{
+    return std::make_shared<Reader>(stream);
+}
+
 Reader::~Reader() = default;
 
 size_t Reader::Read(char* buffer, size_t size)
