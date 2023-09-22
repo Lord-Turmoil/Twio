@@ -10,3 +10,5 @@ file(GLOB_RECURSE SRC_LIST CONFIGURE_DEPENDS src/*.cpp)
 add_executable(${CMAKE_PROJECT_NAME} ${SRC_LIST})
 
 add_subdirectory(twio)
+
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE twio)

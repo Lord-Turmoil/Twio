@@ -7,24 +7,23 @@ TWIO_BEGIN
 
 
 BufferInputStream::BufferInputStream(const char* buffer, size_t size)
+    : _size(size), _next(0)
 {
     TWIO_ASSERT(buffer);
 
-    _size = TWIO_ALIGN_8(size);
-    _buffer = std::make_unique<char[]>(_size);
+    _buffer = std::make_unique<char[]>(TWIO_ALIGN_8(_size));
 
     memcpy(_buffer.get(), buffer, size);
 
-    _next = 0;
 }
 
 BufferInputStream::BufferInputStream(const char* buffer)
+    : _next(0)
 {
-    size_t size = strlen(buffer);
-    _size = TWIO_ALIGN_8(size);
-    _buffer = std::make_unique<char[]>(_size);
+    _size = strlen(buffer);
+    _buffer = std::make_unique<char[]>(TWIO_ALIGN_8(_size));
 
-    memcpy(_buffer.get(), buffer, size);
+    memcpy(_buffer.get(), buffer, _size);
 }
 
 std::shared_ptr<BufferInputStream> BufferInputStream::New(const char* buffer, size_t size)

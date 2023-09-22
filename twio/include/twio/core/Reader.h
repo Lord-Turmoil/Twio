@@ -11,7 +11,7 @@ class Reader final : public IReader, public ReaderBuffer
 {
 public:
     Reader(IInputStreamPtr stream);
-    virtual ~Reader() override;
+    ~Reader() override;
 
     size_t Read(char* buffer, size_t size) override;
     int Read() override;

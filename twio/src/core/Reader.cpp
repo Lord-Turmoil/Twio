@@ -8,6 +8,8 @@ Reader::Reader(IInputStreamPtr stream) : _stream(stream)
     TWIO_ASSERT(stream != nullptr);
 }
 
+Reader::~Reader() = default;
+
 size_t Reader::Read(char* buffer, size_t size)
 {
     TWIO_ASSERT(buffer != nullptr);
@@ -51,11 +53,7 @@ int Reader::Read()
 
 int Reader::Rewind()
 {
-    int ch = _Pop();
-
-    TWIO_ASSERT(ch >= 0);
-
-    return ch;
+    return _Pop();
 }
 
 TWIO_END
