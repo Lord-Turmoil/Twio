@@ -47,13 +47,13 @@ bool FileOutputStream::IsReady() const
 
 size_t FileOutputStream::Write(const char* buffer, size_t size)
 {
-    TWIO_ASSERT(!IsReady());
+    TWIO_ASSERT(IsReady());
     return fwrite(buffer, sizeof(char), size, _fp);
 }
 
 size_t FileOutputStream::Write(char ch)
 {
-    TWIO_ASSERT(!IsReady());
+    TWIO_ASSERT(IsReady());
 
     const int ret = fputc(ch, _fp);
 

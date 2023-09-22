@@ -38,7 +38,7 @@ bool BufferOutputStream::IsReady() const
 
 size_t BufferOutputStream::Write(const char* buffer, size_t size)
 {
-    TWIO_ASSERT(!IsReady());
+    TWIO_ASSERT(IsReady());
 
     const size_t newSize = _next + size;
     _EnsureBufferSize(newSize);
@@ -51,7 +51,7 @@ size_t BufferOutputStream::Write(const char* buffer, size_t size)
 
 size_t BufferOutputStream::Write(char ch)
 {
-    TWIO_ASSERT(!IsReady());
+    TWIO_ASSERT(IsReady());
 
     _EnsureBufferSize(_next + 1);
     _buffer[_next++] = ch;

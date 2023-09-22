@@ -47,7 +47,7 @@ bool FileInputStream::IsReady() const
 
 size_t FileInputStream::Read(char* buffer, size_t size)
 {
-    TWIO_ASSERT(!IsReady());
+    TWIO_ASSERT(IsReady());
     const size_t count = fread(buffer, sizeof(char), size, _fp);
     buffer[count] = '\0';
     return count;
@@ -55,7 +55,7 @@ size_t FileInputStream::Read(char* buffer, size_t size)
 
 size_t FileInputStream::Read(char* buffer)
 {
-    TWIO_ASSERT(!IsReady());
+    TWIO_ASSERT(IsReady());
 
     const int ch = fgetc(_fp);
     if (ch == EOF)
@@ -76,7 +76,7 @@ size_t FileInputStream::Read(char* buffer)
 
 int FileInputStream::Read()
 {
-    TWIO_ASSERT(!IsReady());
+    TWIO_ASSERT(IsReady());
 
     return fgetc(_fp);
 }

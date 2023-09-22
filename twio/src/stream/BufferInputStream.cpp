@@ -54,7 +54,7 @@ bool BufferInputStream::IsReady() const
 
 size_t BufferInputStream::Read(char* buffer, size_t size)
 {
-    TWIO_ASSERT(!IsReady());
+    TWIO_ASSERT(IsReady());
 
     // adjust size
     size = std::min(size, _size - _next);
@@ -71,7 +71,7 @@ size_t BufferInputStream::Read(char* buffer, size_t size)
 
 size_t BufferInputStream::Read(char* buffer)
 {
-    TWIO_ASSERT(!IsReady());
+    TWIO_ASSERT(IsReady());
 
     // buffer empty
     if (_next >= _size)
@@ -87,7 +87,7 @@ size_t BufferInputStream::Read(char* buffer)
 
 int BufferInputStream::Read()
 {
-    TWIO_ASSERT(!IsReady());
+    TWIO_ASSERT(IsReady());
 
     // buffer empty
     if (_next >= _size)
