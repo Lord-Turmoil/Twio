@@ -4,7 +4,7 @@
 #define _TWIO_BUFFER_OUTPUT_STREAM_H_
 
 #include <twio/Macros.h>
-#include <twio/stream/IOutputStream.h>
+#include <twio/stream/IStream.h>
 #include <memory>
 
 TWIO_BEGIN

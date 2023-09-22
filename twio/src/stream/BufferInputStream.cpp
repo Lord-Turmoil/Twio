@@ -1,6 +1,7 @@
 #include <twio/stream/BufferInputStream.h>
 #include <cstring>
 #include <utility>
+#include <cstdio>   // EOF
 
 TWIO_BEGIN
 
@@ -9,7 +10,7 @@ BufferInputStream::BufferInputStream(const char* buffer, size_t size)
 {
     TWIO_ASSERT(buffer);
 
-    _size = TWIO_ALIGN(size);
+    _size = TWIO_ALIGN_8(size);
     _buffer = std::make_unique<char[]>(_size);
 
     memcpy(_buffer.get(), buffer, size);
@@ -20,7 +21,7 @@ BufferInputStream::BufferInputStream(const char* buffer, size_t size)
 BufferInputStream::BufferInputStream(const char* buffer)
 {
     size_t size = strlen(buffer);
-    _size = _Align8(size);
+    _size = TWIO_ALIGN_8(size);
     _buffer = std::make_unique<char[]>(_size);
 
     memcpy(_buffer.get(), buffer, size);
@@ -49,7 +50,7 @@ void BufferInputStream::Close()
 
 bool BufferInputStream::IsReady() const
 {
-    return _fp != nullptr;
+    return _buffer != nullptr;
 }
 
 size_t BufferInputStream::Read(char* buffer, size_t size)
