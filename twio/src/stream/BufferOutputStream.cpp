@@ -11,7 +11,7 @@ BufferOutputStream::BufferOutputStream(size_t size)
     _next = 0;
 }
 
-std::shared_ptr<BufferOutputStream> New(size_t size)
+std::shared_ptr<BufferOutputStream> BufferOutputStream::New(size_t size)
 {
     return std::make_shared<BufferOutputStream>(size);
 }
@@ -66,6 +66,16 @@ size_t BufferOutputStream::Write(char ch)
     _buffer[_next++] = ch;
 
     return 1;
+}
+
+RedirectRequestPtr BufferOutputStream::Yield()
+{
+    TWIO_ASSERT(IsReady());
+
+    // Append a null-termination.
+    Write('\0');
+
+    return RedirectRequest::New(RedirectProtocol::SRP_BUFFER, std::move(_buffer));
 }
 
 void BufferOutputStream::_EnsureBufferSize(size_t size)

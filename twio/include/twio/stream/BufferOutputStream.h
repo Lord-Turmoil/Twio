@@ -33,6 +33,8 @@ public:
     size_t Write(const char* buffer) override;
     size_t Write(char ch) override;
 
+    RedirectRequestPtr Yield() override;
+
 private:
     void _EnsureBufferSize(size_t size);
 

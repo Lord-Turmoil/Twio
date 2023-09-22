@@ -1,4 +1,5 @@
 #include <twio/stream/BufferInputStream.h>
+#include <twio/stream/RedirectProtocol.h>
 #include <cstring>
 #include <utility>
 #include <cstdio>   // EOF
@@ -17,13 +18,41 @@ BufferInputStream::BufferInputStream(const char* buffer, size_t size)
 
 }
 
-BufferInputStream::BufferInputStream(const char* buffer)
-    : _next(0)
+BufferInputStream::BufferInputStream(const char* buffer) : _next(0)
 {
     _size = strlen(buffer);
     _buffer = std::make_unique<char[]>(TWIO_ALIGN_8(_size));
 
     memcpy(_buffer.get(), buffer, _size);
+}
+
+BufferInputStream::BufferInputStream() : _size(0), _next(0)
+{
+}
+
+BufferInputStream::BufferInputStream(RedirectRequestPtr request)
+{
+    Accept(std::move(request));
+}
+
+BufferInputStream::BufferInputStream(BufferInputStream&& other)
+{
+    _buffer = std::move(other._buffer);
+    _size = other._size;
+    _next = other._next;
+}
+
+BufferInputStream& BufferInputStream::operator=(BufferInputStream&& other)
+{
+    // Avoid self assignment!
+    if (this != &other)
+    {
+        // Old data will be freed automatically.
+        _buffer = std::move(other._buffer);
+        _size = other._size;
+        _next = other._next;
+    }
+    return *this;
 }
 
 std::shared_ptr<BufferInputStream> BufferInputStream::New(const char* buffer, size_t size)
@@ -34,6 +63,11 @@ std::shared_ptr<BufferInputStream> BufferInputStream::New(const char* buffer, si
 std::shared_ptr<BufferInputStream> BufferInputStream::New(const char* buffer)
 {
     return std::make_shared<BufferInputStream>(buffer);
+}
+
+std::shared_ptr<BufferInputStream> BufferInputStream::New(RedirectRequestPtr request)
+{
+    return std::make_shared<BufferInputStream>(std::move(request));
 }
 
 BufferInputStream::~BufferInputStream()
@@ -96,6 +130,22 @@ int BufferInputStream::Read()
     }
 
     return _buffer[_next++];
+}
+
+void BufferInputStream::Accept(RedirectRequestPtr request)
+{
+    TWIO_ASSERT(request);
+
+    // Currently only support buffer request.
+    if (request->protocol != RedirectProtocol::SRP_BUFFER)
+    {
+        TWIO_PANIC("BufferInputStream only accept buffer request.");
+    }
+
+    // old value will be freed automatically.
+    _buffer = std::move(request->buffer);
+    _size = strlen(_buffer.get());
+    _next = 0;
 }
 
 TWIO_END

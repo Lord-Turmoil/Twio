@@ -21,16 +21,21 @@ public:
     // Initialize via a given buffer, which must be a null-terminated string.
     explicit BufferInputStream(const char* buffer);
 
+    // Initialize via a redirect request, which must be a buffer request for now.
+    BufferInputStream();
+    BufferInputStream(RedirectRequestPtr request);
+
     // Copy is prohibited.
-    BufferInputStream& operator=(const BufferInputStream&) = delete;
-    BufferInputStream& operator=(BufferInputStream&& obj) = delete;
     BufferInputStream(const BufferInputStream&) = delete;
-    BufferInputStream(BufferInputStream&& obj) = delete;
+    BufferInputStream(BufferInputStream&& other);
+    BufferInputStream& operator=(const BufferInputStream&) = delete;
+    BufferInputStream& operator=(BufferInputStream&& other);
 
     ~BufferInputStream() override;
 
     static std::shared_ptr<BufferInputStream> New(const char* buffer, size_t size);
     static std::shared_ptr<BufferInputStream> New(const char* buffer);
+    static std::shared_ptr<BufferInputStream> New(RedirectRequestPtr request);
 
 public:
     // Close the buffer input means free the memory.
@@ -42,6 +47,8 @@ public:
     size_t Read(char* buffer, size_t size) override;
     size_t Read(char* buffer) override;
     int Read() override;
+
+    void Accept(RedirectRequestPtr request) override;
 
 private:
     std::unique_ptr<char[]> _buffer;

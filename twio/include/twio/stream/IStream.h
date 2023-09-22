@@ -4,6 +4,7 @@
 #define _TWIO_STREAM_H_
 
 #include <twio/Macros.h>
+#include <twio/stream/RedirectProtocol.h>
 #include <memory>
 
 TWIO_BEGIN
@@ -32,6 +33,12 @@ public:
 
     // Read one character from the stream.
     virtual int Read() = 0;
+
+    // Default implementation is not implemented.
+    virtual void Accept(RedirectRequestPtr request)
+    {
+        TWIO_PANIC("Not implemented");
+    }
 };
 
 
@@ -48,6 +55,13 @@ public:
 
     // Write one character to the stream.
     virtual size_t Write(char ch) = 0;
+
+    // Default implementation is not implemented.
+    virtual RedirectRequestPtr Yield()
+    {
+        TWIO_PANIC("Not implemented");
+        return nullptr;
+    }
 };
 
 
