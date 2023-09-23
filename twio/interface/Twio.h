@@ -1,6 +1,4 @@
-/*
- * Common header files for Twio library.
- */
+// Copyright (C) 2018 - 2023 Tony's Studio. All rights reserved.
 
 #ifndef _TWIO_H_
 #define _TWIO_H_

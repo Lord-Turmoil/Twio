@@ -23,7 +23,7 @@ FileInputStream::FileInputStream(const char* path)
     _takeOver = true;
 }
 
-FileInputStream::FileInputStream(FileInputStream&& other)
+FileInputStream::FileInputStream(FileInputStream&& other) noexcept
 {
     _fp = other._fp;
     _takeOver = other._takeOver;
@@ -31,7 +31,7 @@ FileInputStream::FileInputStream(FileInputStream&& other)
     other._fp = nullptr;
 }
 
-FileInputStream& FileInputStream::operator=(FileInputStream&& other)
+FileInputStream& FileInputStream::operator=(FileInputStream&& other) noexcept
 {
     if (this != &other)
     {
