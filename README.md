@@ -4,7 +4,7 @@
 
 ---
 
-[![Build](https://github.com/Lord-Turmoil/Twio/actions/workflows/cmake-multi-platform.yml/badge.svg?branch=main)](https://github.com/Lord-Turmoil/Twio/actions/workflows/cmake-multi-platform.yml)
+[![Build](https://github.com/Lord-Turmoil/Twio/actions/workflows/cmake-windows.yml/badge.svg?branch=main)](https://github.com/Lord-Turmoil/Twio/actions/workflows/cmake-windows.yml)
 
 ## 1. Overview
 
