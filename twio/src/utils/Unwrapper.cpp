@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <twio/utils/Unwrapper.h>
 
 TWIO_BEGIN

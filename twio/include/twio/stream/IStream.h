@@ -47,9 +47,7 @@ public:
 class IOutputStream : public IStream
 {
 public:
-    ~IOutputStream() override
-    {
-    }
+    ~IOutputStream() override = default;
 
     // Write up to 'size' characters from the buffer to the stream.
     virtual size_t Write(const char* buffer, size_t size) = 0;

@@ -14,8 +14,11 @@
 const char BUFFER[] = "ABC\nDEFGHI\nJKLMNOPQR\nSTUVWXYZ\n";
 char finalBuffer[32];
 
+void memory_test();
 int main()
 {
+    memory_test();
+
     /*
      * Test basic buffer reader.
      */
@@ -66,7 +69,7 @@ int main()
     // transfer the output stream of the writer to a input stream.
     inputStream = twio::BufferInputStream::New(writer->Stream()->Yield());
     // Create a reader from the transferred input stream.
-    twio::IReaderPtr reader = twio::Reader::New(inputStream);
+    twio::IReaderPtr reader = twio::Reader::New(std::move(inputStream));
 
     // Notice that, after Yield, the writer will no longer be able to write.
     // writer->Write("This will cause an error!\n");
@@ -77,7 +80,7 @@ int main()
 
     // Write things into a file.
     twio::IOutputStreamPtr fileOutputStream = twio::FileOutputStream::New("test.txt");
-    twio::IWriterPtr fileWriter = twio::Writer::New(fileOutputStream);
+    twio::IWriterPtr fileWriter = twio::Writer::New(std::move(fileOutputStream));
 
     printer = twio::Printer::New(reader, fileWriter);
     printer->Print();
@@ -101,4 +104,41 @@ int main()
     printf("Congratulations! Everything is OK!\n");
 
     return 0;
+}
+
+void memory_test()
+{
+    // Normal use
+    {
+        auto reader = twio::Reader::New(twio::FileInputStream::New("test.txt"));
+        auto writer = twio::Writer::New(twio::FileOutputStream::New("out.txt"));
+        auto printer = twio::Printer::New(reader, writer);
+
+        printer->Print();
+    }
+
+    // Normal use
+    {
+        auto reader = twio::Reader::New(twio::BufferInputStream::New(BUFFER));
+        auto writer = twio::Writer::New(twio::BufferOutputStream::New());
+        auto printer = twio::Printer::New(reader, writer);
+
+        printer->Print();
+    }
+
+    // Use after yield
+    {
+        auto reader = twio::Reader::New(twio::BufferInputStream::New(BUFFER));
+        auto writer = twio::Writer::New(twio::BufferOutputStream::New());
+        auto printer = twio::Printer::New(reader, writer);
+
+        printer->Print();
+
+        auto stream = twio::BufferInputStream::New(writer->Stream()->Yield());
+        auto newReader = twio::Reader::New(stream);
+        auto newWriter = twio::Writer::New(twio::FileOutputStream::New("test.txt"));
+        auto newPrinter = twio::Printer::New(reader, writer);
+
+        newPrinter->Print();
+    }
 }
