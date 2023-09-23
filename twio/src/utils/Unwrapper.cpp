@@ -1,3 +1,5 @@
+// Copyright (C) 2018 - 2023 Tony's Studio. All rights reserved.
+
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <twio/utils/Unwrapper.h>
