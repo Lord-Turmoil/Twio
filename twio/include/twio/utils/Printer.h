@@ -21,9 +21,16 @@ public:
     Printer(IReaderPtr reader, IWriterPtr writer);
     ~Printer() override = default;
 
+    Printer(const Printer&) = delete;
+    Printer& operator=(const Printer&) = delete;
+    Printer(Printer&& other) noexcept;
+    Printer& operator=(Printer&& other) noexcept;
+
     static std::shared_ptr<Printer> New(IReaderPtr reader, IWriterPtr writer);
 
     void Print() override;
+
+    bool IsReady() const override;
 
 private:
     IReaderPtr _reader;
