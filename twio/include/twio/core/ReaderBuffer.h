@@ -3,9 +3,10 @@
 #ifndef _TWIO_READER_BUFFER_H_
 #define _TWIO_READER_BUFFER_H_
 
-#include <twio/core/IReader.h>
+#include <twio/Macros.h>
 
 TWIO_BEGIN
+
 
 // Reader will keep last READER_BUFFER_SIZE bytes in memory.
 const size_t READER_BUFFER_SIZE = 1024;
