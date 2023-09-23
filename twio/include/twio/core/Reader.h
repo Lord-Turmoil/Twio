@@ -27,6 +27,8 @@ public:
 
     IInputStreamPtr Stream() const override;
 
+    void Close() override;
+
 private:
     IInputStreamPtr _stream;
 };

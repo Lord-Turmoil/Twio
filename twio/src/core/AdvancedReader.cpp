@@ -88,6 +88,14 @@ IInputStreamPtr AdvancedReader::Stream() const
     return _stream;
 }
 
+void AdvancedReader::Close()
+{
+    if (_stream)
+    {
+        _stream->Close();
+    }
+}
+
 // Currently will ignore '\r'.
 void AdvancedReader::_MoveForward(char ch)
 {

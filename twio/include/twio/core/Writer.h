@@ -25,6 +25,8 @@ public:
 
     IOutputStreamPtr Stream() const override;
 
+    void Close() override;
+
 private:
     IOutputStreamPtr _stream;
 };

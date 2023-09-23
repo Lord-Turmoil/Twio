@@ -27,6 +27,8 @@ public:
     virtual size_t Write(char ch) = 0;
 
     virtual IOutputStreamPtr Stream() const = 0;
+
+    virtual void Close() = 0;
 };
 
 inline IWriter::~IWriter() = default;

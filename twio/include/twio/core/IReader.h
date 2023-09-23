@@ -21,6 +21,8 @@ public:
     virtual int Rewind() = 0;
 
     virtual IInputStreamPtr Stream() const = 0;
+
+    virtual void Close() = 0;
 };
 
 inline IReader::~IReader() = default;

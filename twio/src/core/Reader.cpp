@@ -68,4 +68,12 @@ IInputStreamPtr Reader::Stream() const
     return _stream;
 }
 
+void Reader::Close()
+{
+    if (_stream)
+    {
+        _stream->Close();
+    }
+}
+
 TWIO_END

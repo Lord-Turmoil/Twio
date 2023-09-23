@@ -36,4 +36,12 @@ IOutputStreamPtr Writer::Stream() const
     return _stream;
 }
 
+void Writer::Close()
+{
+    if (_stream)
+    {
+        _stream->Close();
+    }
+}
+
 TWIO_END
