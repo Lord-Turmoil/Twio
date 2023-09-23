@@ -6,7 +6,7 @@
 #define _TWIO_STREAM_H_
 
 #include <twio/Macros.h>
-#include <twio/stream/RedirectProtocol.h>
+#include <twio/stream/RedirectRequest.h>
 #include <memory>
 
 TWIO_BEGIN
