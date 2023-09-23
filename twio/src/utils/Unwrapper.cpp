@@ -6,7 +6,7 @@
 
 TWIO_BEGIN
 
-void UnwrapStream(IOutputStreamPtr stream, char* buffer)
+void UnwrapStream(const IOutputStreamPtr& stream, char* buffer)
 {
     TWIO_ASSERT(stream);
 

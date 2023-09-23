@@ -16,7 +16,7 @@ int main()
      * Test basic buffer reader.
      */
 
-    // Create a input stream from a null-terminated buffer.
+    // Create an input stream from a null-terminated buffer.
     twio::IInputStreamPtr inputStream = twio::BufferInputStream::New(BUFFER);
     // Create an advanced reader from the input stream that record line and char info.
     twio::IAdvancedReaderPtr advancedReader = twio::AdvancedReader::New(inputStream);
@@ -88,7 +88,7 @@ int main()
 
     printer->Print();
 
-    UnwrapStream(writer->Stream(), finalBuffer);
+    twio::UnwrapStream(writer->Stream(), finalBuffer);
     // Notice that, after unwrap, the writer will also be unable to write.
     // writer->Write("This will cause an error!\n");
 

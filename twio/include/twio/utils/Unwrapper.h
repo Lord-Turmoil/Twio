@@ -12,7 +12,7 @@ TWIO_BEGIN
 
 
 // A utility class to unwrap stream to raw buffer.
-void UnwrapStream(IOutputStreamPtr stream, char* buffer);
+void UnwrapStream(const IOutputStreamPtr& stream, char* buffer);
 
 
 TWIO_END

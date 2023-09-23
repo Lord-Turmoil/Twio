@@ -26,9 +26,9 @@ public:
 
     // Copy is prohibited.
     FileInputStream(const FileInputStream&) = delete;
-    FileInputStream(FileInputStream&&) = delete;
+    FileInputStream(FileInputStream&& other) noexcept;
     FileInputStream& operator=(const FileInputStream&) = delete;
-    FileInputStream& operator=(FileInputStream&&) = delete;
+    FileInputStream& operator=(FileInputStream&& other) noexcept;
 
     // Ensure the file is closed.
     ~FileInputStream() override;

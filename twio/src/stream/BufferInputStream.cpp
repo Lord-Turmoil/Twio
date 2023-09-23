@@ -36,14 +36,14 @@ BufferInputStream::BufferInputStream(RedirectRequestPtr request)
     Accept(std::move(request));
 }
 
-BufferInputStream::BufferInputStream(BufferInputStream&& other)
+BufferInputStream::BufferInputStream(BufferInputStream&& other) noexcept
 {
     _buffer = std::move(other._buffer);
     _size = other._size;
     _next = other._next;
 }
 
-BufferInputStream& BufferInputStream::operator=(BufferInputStream&& other)
+BufferInputStream& BufferInputStream::operator=(BufferInputStream&& other) noexcept
 {
     // Avoid self assignment!
     if (this != &other)

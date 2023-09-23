@@ -24,14 +24,15 @@ public:
     explicit BufferInputStream(const char* buffer);
 
     // Initialize via a redirect request, which must be a buffer request for now.
+    explicit BufferInputStream(RedirectRequestPtr request);
+
     BufferInputStream();
-    BufferInputStream(RedirectRequestPtr request);
 
     // Copy is prohibited.
     BufferInputStream(const BufferInputStream&) = delete;
-    BufferInputStream(BufferInputStream&& other);
+    BufferInputStream(BufferInputStream&& other) noexcept;
     BufferInputStream& operator=(const BufferInputStream&) = delete;
-    BufferInputStream& operator=(BufferInputStream&& other);
+    BufferInputStream& operator=(BufferInputStream&& other) noexcept;
 
     ~BufferInputStream() override;
 

@@ -15,15 +15,15 @@
 TWIO_BEGIN
 
 
-class Printer : public IPrinter
+class Printer final : public IPrinter
 {
 public:
     Printer(IReaderPtr reader, IWriterPtr writer);
     ~Printer() override = default;
 
     Printer(const Printer&) = delete;
-    Printer& operator=(const Printer&) = delete;
     Printer(Printer&& other) noexcept;
+    Printer& operator=(const Printer&) = delete;
     Printer& operator=(Printer&& other) noexcept;
 
     static std::shared_ptr<Printer> New(IReaderPtr reader, IWriterPtr writer);

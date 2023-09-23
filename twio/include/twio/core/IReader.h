@@ -20,6 +20,7 @@ public:
 
     virtual int Rewind() = 0;
 
+    // Dangerous method, use with caution.
     virtual IInputStreamPtr Stream() const = 0;
 
     virtual void Close() = 0;
