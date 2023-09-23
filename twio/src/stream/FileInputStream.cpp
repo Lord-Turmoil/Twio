@@ -2,6 +2,7 @@
 
 #include <twio/stream/FileInputStream.h>
 #include <twio/utils/FileUtil.h>
+#include <cstdio>   // EOF
 
 TWIO_BEGIN
 
