@@ -21,7 +21,7 @@
 #ifdef ENABLE_ASSERT
 #include <cassert>
 #define TWIO_ASSERT(expression) assert(expression)
-#define TWIO_PANIC(expression) (_wassert(_CRT_WIDE(#expression), _CRT_WIDE(__FILE__), (unsigned)(__LINE__)))
+#define TWIO_PANIC(expression) assert(false && (expression))
 #else
 #define TWIO_ASSERT(...)
 #endif
