@@ -32,6 +32,8 @@ public:
 
     IInputStreamPtr Stream() const override;
 
+    void Close() override;
+
 private:
     void _MoveForward(char ch);
     void _MoveBackward(char ch);

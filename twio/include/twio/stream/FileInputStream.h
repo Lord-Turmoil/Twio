@@ -26,14 +26,15 @@ public:
 
     // Copy is prohibited.
     FileInputStream(const FileInputStream&) = delete;
-    FileInputStream(FileInputStream&& obj) = delete;
+    FileInputStream(FileInputStream&& other) noexcept;
     FileInputStream& operator=(const FileInputStream&) = delete;
-    FileInputStream& operator=(FileInputStream&& obj) = delete;
+    FileInputStream& operator=(FileInputStream&& other) noexcept;
 
     // Ensure the file is closed.
     ~FileInputStream() override;
 
     static std::shared_ptr<FileInputStream> New(FILE* fp, bool takeOver = true);
+    static std::shared_ptr<FileInputStream> New(const char* path);
 
 public:
     // Manually close the file.

@@ -26,9 +26,9 @@ public:
 
     // Copy is prohibited.
     FileOutputStream(const FileOutputStream&) = delete;
-    FileOutputStream(FileOutputStream&& obj) = delete;
+    FileOutputStream(FileOutputStream&&) = delete;
     FileOutputStream& operator=(const FileOutputStream&) = delete;
-    FileOutputStream& operator=(FileOutputStream&& obj) = delete;
+    FileOutputStream& operator=(FileOutputStream&&) = delete;
 
     // Ensure the file is closed.
     ~FileOutputStream() override;

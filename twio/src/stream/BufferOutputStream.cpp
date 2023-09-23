@@ -4,11 +4,11 @@
 
 TWIO_BEGIN
 
-const size_t BufferOutputStream::DEFAULT_BUFFER_SIZE = 1024;
+const size_t BufferOutputStream::DEFAULT_BLOCK_SIZE = 1024;
 
 BufferOutputStream::BufferOutputStream(size_t size)
 {
-    _size = TWIO_ALIGN(size, DEFAULT_BUFFER_SIZE);
+    _size = TWIO_ALIGN(size, DEFAULT_BLOCK_SIZE);
     _buffer = std::make_unique<char[]>(_size);
     _next = 0;
 }
@@ -84,7 +84,7 @@ void BufferOutputStream::_EnsureBufferSize(size_t size)
 {
     if (size > _size)
     {
-        const size_t newSize = TWIO_ALIGN(size, DEFAULT_BUFFER_SIZE);
+        const size_t newSize = TWIO_ALIGN(size, DEFAULT_BLOCK_SIZE);
         auto newBuffer = std::make_unique<char[]>(newSize);
 
         memcpy(newBuffer.get(), _buffer.get(), _size);

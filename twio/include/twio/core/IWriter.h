@@ -26,7 +26,10 @@ public:
     // Write a character to output stream.
     virtual size_t Write(char ch) = 0;
 
+    // Dangerous method, use with caution.
     virtual IOutputStreamPtr Stream() const = 0;
+
+    virtual void Close() = 0;
 };
 
 inline IWriter::~IWriter() = default;

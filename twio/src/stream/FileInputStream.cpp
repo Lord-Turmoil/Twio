@@ -10,7 +10,7 @@ FileInputStream::FileInputStream(FILE* fp, bool takeOver)
     : _fp(fp), _takeOver(takeOver)
 {
     TWIO_ASSERT(_fp);
-    TWIO_ASSERT(!IsReadOnly(_fp));
+    // TWIO_ASSERT(IsReadOnly(_fp));
 }
 
 FileInputStream::FileInputStream(const char* path)
@@ -23,9 +23,37 @@ FileInputStream::FileInputStream(const char* path)
     _takeOver = true;
 }
 
-std::shared_ptr<FileInputStream> New(FILE* fp, bool takeOver)
+FileInputStream::FileInputStream(FileInputStream&& other) noexcept
+{
+    _fp = other._fp;
+    _takeOver = other._takeOver;
+
+    other._fp = nullptr;
+}
+
+FileInputStream& FileInputStream::operator=(FileInputStream&& other) noexcept
+{
+    if (this != &other)
+    {
+        Close();
+
+        _fp = other._fp;
+        _takeOver = other._takeOver;
+
+        other._fp = nullptr;
+    }
+
+    return *this;
+}
+
+std::shared_ptr<FileInputStream> FileInputStream::New(FILE* fp, bool takeOver)
 {
     return std::make_shared<FileInputStream>(fp, takeOver);
+}
+
+std::shared_ptr<FileInputStream> FileInputStream::New(const char* path)
+{
+    return std::make_shared<FileInputStream>(path);
 }
 
 FileInputStream::~FileInputStream()
@@ -37,7 +65,10 @@ void FileInputStream::Close()
 {
     if (_fp)
     {
-        CloseFile(_fp);
+        if (_takeOver)
+        {
+            CloseFile(_fp);
+        }
         _fp = nullptr;
     }
 }

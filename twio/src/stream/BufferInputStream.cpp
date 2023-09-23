@@ -1,7 +1,7 @@
 // Copyright (C) 2018 - 2023 Tony's Studio. All rights reserved.
 
 #include <twio/stream/BufferInputStream.h>
-#include <twio/stream/RedirectProtocol.h>
+#include <twio/stream/RedirectRequest.h>
 #include <cstring>
 #include <utility>
 #include <cstdio>   // EOF
@@ -36,14 +36,14 @@ BufferInputStream::BufferInputStream(RedirectRequestPtr request)
     Accept(std::move(request));
 }
 
-BufferInputStream::BufferInputStream(BufferInputStream&& other)
+BufferInputStream::BufferInputStream(BufferInputStream&& other) noexcept
 {
     _buffer = std::move(other._buffer);
     _size = other._size;
     _next = other._next;
 }
 
-BufferInputStream& BufferInputStream::operator=(BufferInputStream&& other)
+BufferInputStream& BufferInputStream::operator=(BufferInputStream&& other) noexcept
 {
     // Avoid self assignment!
     if (this != &other)

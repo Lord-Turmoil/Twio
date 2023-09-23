@@ -1,6 +1,7 @@
 // Copyright (C) 2018 - 2023 Tony's Studio. All rights reserved.
 
 #include <twio/core/AdvancedReader.h>
+#include <cstdio>   // EOF
 
 TWIO_BEGIN
 
@@ -86,6 +87,14 @@ int AdvancedReader::Char() const
 IInputStreamPtr AdvancedReader::Stream() const
 {
     return _stream;
+}
+
+void AdvancedReader::Close()
+{
+    if (_stream)
+    {
+        _stream->Close();
+    }
 }
 
 // Currently will ignore '\r'.

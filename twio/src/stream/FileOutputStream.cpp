@@ -10,7 +10,7 @@ FileOutputStream::FileOutputStream(FILE* fp, bool takeOver)
     : _fp(fp), _takeOver(takeOver)
 {
     TWIO_ASSERT(_fp);
-    TWIO_ASSERT(!IsWriteOnly(_fp));
+    // TWIO_ASSERT(IsWriteOnly(_fp));
 }
 
 FileOutputStream::FileOutputStream(const char* path)
@@ -47,7 +47,10 @@ void FileOutputStream::Close()
 {
     if (_fp)
     {
-        CloseFile(_fp);
+        if (_takeOver)
+        {
+            CloseFile(_fp);
+        }
         _fp = nullptr;
     }
 }

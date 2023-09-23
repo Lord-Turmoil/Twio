@@ -17,6 +17,8 @@ public:
     virtual ~IPrinter() = 0;
 
     virtual void Print() = 0;
+
+    virtual bool IsReady() const = 0;
 };
 
 inline IPrinter::~IPrinter() = default;
