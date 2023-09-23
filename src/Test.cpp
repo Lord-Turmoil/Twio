@@ -1,23 +1,16 @@
-﻿#include <twio/stream/BufferInputStream.h>
-#include <twio/core/Reader.h>
+﻿// Copyright (C) 2018 - 2023 Tony's Studio. All rights reserved.
 
-#include <cstdio>
-
-#include <twio/core/AdvancedReader.h>
-#include <twio/core/Writer.h>
-#include <twio/stream/BufferOutputStream.h>
-#include <twio/stream/FileInputStream.h>
-#include <twio/stream/FileOutputStream.h>
-#include <twio/utils/Printer.h>
-#include <twio/utils/Unwrapper.h>
+#include <Twio.h>
 
 const char BUFFER[] = "ABC\nDEFGHI\nJKLMNOPQR\nSTUVWXYZ\n";
 char finalBuffer[32];
 
 void memory_test();
+void console_test();
 int main()
 {
     memory_test();
+    console_test();
 
     /*
      * Test basic buffer reader.
@@ -95,7 +88,7 @@ int main()
 
     printer->Print();
 
-    twio::UnwrapStream(writer->Stream(), finalBuffer);
+    UnwrapStream(writer->Stream(), finalBuffer);
     // Notice that, after unwrap, the writer will also be unable to write.
     // writer->Write("This will cause an error!\n");
 
@@ -141,4 +134,15 @@ void memory_test()
 
         newPrinter->Print();
     }
+}
+
+
+void console_test()
+{
+    auto reader = twio::Reader::New(twio::FileInputStream::New(stdin, false));
+    auto writer = twio::Writer::New(twio::FileOutputStream::New(stdout, false));
+
+    auto printer = twio::Printer::New(reader, writer);
+
+    printer->Print();
 }
