@@ -24,6 +24,7 @@
 #define TWIO_PANIC(expression) assert(false && (expression))
 #else
 #define TWIO_ASSERT(...)
+#define TWIO_PANIC(expression)
 #endif
 
 // Align size to 8 bytes.
