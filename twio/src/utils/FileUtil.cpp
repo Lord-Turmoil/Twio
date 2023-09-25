@@ -6,6 +6,7 @@
 // ... To be continued... :(
 #else
 #include <unistd.h>
+#include <fcntl.h>
 #endif
 
 TWIO_BEGIN
@@ -40,7 +41,7 @@ bool IsReadOnly(FILE* fp)
 #else
 bool IsReadOnly(FILE* fp)
 {
-    int fd = fileno(file);
+    int fd = fileno(fp);
     int mode = fcntl(fd, F_GETFL);
 
     return mode == 32768;
@@ -56,7 +57,7 @@ bool IsWriteOnly(FILE* fp)
 #else
 bool IsWriteOnly(FILE* fp)
 {
-    int fd = fileno(file);
+    int fd = fileno(fp);
     int mode = fcntl(fd, F_GETFL);
 
     return mode == 32769;
