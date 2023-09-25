@@ -1,6 +1,6 @@
 ﻿// Copyright (C) 2018 - 2023 Tony's Studio. All rights reserved.
 
-#include <Twio.h>
+#include <twio.h>
 
 const char BUFFER[] = "ABC\nDEFGHI\nJKLMNOPQR\nSTUVWXYZ\n";
 char finalBuffer[32];

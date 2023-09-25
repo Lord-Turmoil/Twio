@@ -5,7 +5,7 @@
 #ifndef _TWIO_UNWRAPPER_H_
 #define _TWIO_UNWRAPPER_H_
 
-#include <twio/Macros.h>
+#include <twio/Common.h>
 #include <twio/stream/IStream.h>
 
 TWIO_BEGIN

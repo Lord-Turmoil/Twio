@@ -3,7 +3,7 @@
 #ifndef _TWIO_IREADER_H_
 #define _TWIO_IREADER_H_
 
-#include <twio/Macros.h>
+#include <twio/Common.h>
 #include <twio/stream/IStream.h>
 #include <memory>
 
