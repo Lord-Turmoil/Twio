@@ -4,7 +4,7 @@
 
 ---
 
-[![Build](https://github.com/Lord-Turmoil/Twio/actions/workflows/cmake-windows.yml/badge.svg?branch=main)](https://github.com/Lord-Turmoil/Twio/actions/workflows/cmake-windows.yml)
+[![Build](https://github.com/Lord-Turmoil/Twio/actions/workflows/cmake-multi-platform.yml/badge.svg?branch=main)](https://github.com/Lord-Turmoil/Twio/actions/workflows/cmake-multi-platform.yml)
 
 ## 1. Overview
 
@@ -218,3 +218,5 @@ twio::UnwrapStream(writer->Stream(), finalBuffer);
 ## 4. Limitations
 
 Generally speaking, Twio is convenient, but not that perfect. And it can only support redirecting between buffer stream for now. 😞
+
+It seems there will be a little memory leak when using file stream, but this will only occur once on the first use.
