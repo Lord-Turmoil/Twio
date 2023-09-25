@@ -1,5 +1,7 @@
 // Copyright (C) 2018 - 2023 Tony's Studio. All rights reserved.
 
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <twio/utils/FileUtil.h>
 
 #if _TWIO_FOR_WIN32
@@ -13,14 +15,8 @@ TWIO_BEGIN
 
 FILE* OpenFile(const char* path, const char* mode)
 {
-    FILE* fp;
-
-    const int ret = fopen_s(&fp, path, mode);
-    if (ret != 0)
-    {
-        return nullptr;
-    }
-
+    FILE* fp = fopen(path, mode);
+    
     return fp;
 }
 
