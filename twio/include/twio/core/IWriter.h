@@ -6,7 +6,7 @@
 #define _TWIO_IWRITER_H_
 
 #include <memory>
-#include <twio/Macros.h>
+#include <twio/Common.h>
 #include <twio/stream/IStream.h>
 
 TWIO_BEGIN
