@@ -38,7 +38,7 @@ size_t Writer::Write(char ch)
 }
 
 
-size_t Writer::Write(const char* format, ...)
+size_t Writer::WriteFormat(const char* format, ...)
 {
     va_list argv;
 

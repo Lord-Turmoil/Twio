@@ -23,7 +23,7 @@ public:
     size_t Write(const char* buffer) override;
     size_t Write(char ch) override;
 
-    size_t Write(const char* format, ...) override;
+    size_t WriteFormat(const char* format, ...) override;
 
     IOutputStreamPtr Stream() const override;
 
