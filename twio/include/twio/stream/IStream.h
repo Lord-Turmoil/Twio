@@ -8,6 +8,7 @@
 #include <twio/Common.h>
 #include <twio/stream/RedirectRequest.h>
 #include <memory>
+#include <cstdarg>
 
 TWIO_BEGIN
 
@@ -57,6 +58,8 @@ public:
 
     // Write one character to the stream.
     virtual size_t Write(char ch) = 0;
+
+    virtual size_t Write(const char* format, va_list argv) = 0;
 
     // Default implementation is not implemented.
     virtual RedirectRequestPtr Yield()
