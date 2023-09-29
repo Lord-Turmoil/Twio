@@ -68,13 +68,13 @@ int main()
     twio::IReaderPtr reader = twio::Reader::New(std::move(inputStream));
 
     // Notice that, after Yield, the writer will no longer be able to write.
-    // writer->Write("This will cause an error!\n");
+    // writer->WriteFormat("This will cause an error!\n");
 
     /*
      * Test file input and output.
      */
 
-    // Write things into a file.
+    // WriteFormat things into a file.
     twio::IOutputStreamPtr fileOutputStream = twio::FileOutputStream::New("test.txt");
     twio::IWriterPtr fileWriter = twio::Writer::New(std::move(fileOutputStream));
 
@@ -93,7 +93,7 @@ int main()
 
     twio::UnwrapStream(writer->Stream(), finalBuffer);
     // Notice that, after unwrap, the writer will also be unable to write.
-    // writer->Write("This will cause an error!\n");
+    // writer->WriteFormat("This will cause an error!\n");
 
     assert(strcmp(finalBuffer, BUFFER) == 0);
 

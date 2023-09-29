@@ -27,7 +27,7 @@ public:
     virtual size_t Write(char ch) = 0;
 
     // Write formatted string to output stream.
-    virtual size_t Write(const char* format, ...) = 0;
+    virtual size_t WriteFormat(const char* format, ...) = 0;
 
     // Dangerous method, use with caution.
     virtual IOutputStreamPtr Stream() const = 0;
