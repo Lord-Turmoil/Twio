@@ -29,6 +29,9 @@ int main()
         printf("%c - Ln: %d, Ch: %d\n", ch, advancedReader->Line(), advancedReader->Char());
     }
     printf("Backward reading\n");
+    advancedReader->Rewind();
+    printf("%c - Ln: %d, Ch: %d\n", advancedReader->Read(), advancedReader->Line(), advancedReader->Char());
+
     while ((ch = advancedReader->Rewind()) > 0)
     {
         if (ch == '\n') continue;

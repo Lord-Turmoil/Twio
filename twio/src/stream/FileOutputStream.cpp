@@ -86,4 +86,9 @@ size_t FileOutputStream::Write(char ch)
     return (ret == EOF) ? 0 : 1;
 }
 
+size_t FileOutputStream::Write(const char* format, va_list argv)
+{
+    return static_cast<size_t>(vfprintf(_fp, format, argv));
+}
+
 TWIO_END
