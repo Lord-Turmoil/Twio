@@ -15,6 +15,8 @@ class IReader
 public:
     virtual ~IReader() = 0;
 
+    virtual bool HasNext() const = 0;
+
     virtual size_t Read(char* buffer, size_t size) = 0;
     virtual int Read() = 0;
 

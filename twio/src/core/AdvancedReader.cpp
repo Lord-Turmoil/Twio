@@ -20,6 +20,12 @@ std::shared_ptr<AdvancedReader> AdvancedReader::New(const IInputStreamPtr& strea
 }
 
 
+bool AdvancedReader::HasNext() const
+{
+    return _HasNext() || _stream->HasNext();
+}
+
+
 size_t AdvancedReader::Read(char* buffer, size_t size)
 {
     TWIO_ASSERT(buffer != nullptr);

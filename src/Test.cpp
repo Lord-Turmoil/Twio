@@ -7,6 +7,8 @@ char finalBuffer[32];
 
 void memory_test();
 void console_test();
+
+
 int main()
 {
     memory_test();
@@ -23,8 +25,9 @@ int main()
 
     int ch;
     printf("Forward reading\n");
-    while ((ch = advancedReader->Read()) != EOF)
+    while (advancedReader->HasNext())
     {
+        ch = advancedReader->Read();
         if (ch == '\n') continue;
         printf("%c - Ln: %d, Ch: %d\n", ch, advancedReader->Line(), advancedReader->Char());
     }
@@ -91,7 +94,7 @@ int main()
 
     printer->Print();
 
-    twio::UnwrapStream(writer->Stream(), finalBuffer);
+    UnwrapStream(writer->Stream(), finalBuffer);
     // Notice that, after unwrap, the writer will also be unable to write.
     // writer->WriteFormat("This will cause an error!\n");
 
@@ -101,6 +104,7 @@ int main()
 
     return 0;
 }
+
 
 void memory_test()
 {

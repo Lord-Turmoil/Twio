@@ -88,6 +88,12 @@ bool FileInputStream::IsReady() const
 }
 
 
+bool FileInputStream::HasNext() const
+{
+    return IsReady() && !feof(_fp);
+}
+
+
 size_t FileInputStream::Read(char* buffer, size_t size)
 {
     TWIO_ASSERT(IsReady());

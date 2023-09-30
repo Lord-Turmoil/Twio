@@ -20,6 +20,8 @@ public:
 
     static std::shared_ptr<Reader> New(const IInputStreamPtr& stream);
 
+    bool HasNext() const override;
+
     size_t Read(char* buffer, size_t size) override;
     int Read() override;
 
