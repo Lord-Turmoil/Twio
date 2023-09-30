@@ -73,6 +73,7 @@ const char* Reader::ReadLine(char* buffer)
     return buffer;
 }
 
+
 int Reader::Read()
 {
     if (_HasNext())

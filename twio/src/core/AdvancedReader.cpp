@@ -81,6 +81,7 @@ const char* AdvancedReader::ReadLine(char* buffer)
     return buffer;
 }
 
+
 int AdvancedReader::Read()
 {
     if (_HasNext())
