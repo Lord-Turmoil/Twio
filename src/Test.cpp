@@ -7,6 +7,8 @@ char finalBuffer[32];
 
 void memory_test();
 void console_test();
+
+
 int main()
 {
     memory_test();
@@ -23,8 +25,9 @@ int main()
 
     int ch;
     printf("Forward reading\n");
-    while ((ch = advancedReader->Read()) != EOF)
+    while (advancedReader->HasNext())
     {
+        ch = advancedReader->Read();
         if (ch == '\n') continue;
         printf("%c - Ln: %d, Ch: %d\n", ch, advancedReader->Line(), advancedReader->Char());
     }
@@ -41,12 +44,25 @@ int main()
 
 
     /*
+     * Test Read line.
+     */
+    char buffer[64];
+    auto writer = twio::Writer::New(twio::FileOutputStream::New(stdout, false));
+    while (advancedReader->ReadLine(buffer))
+    {
+        writer->WriteFormat("%s\n", buffer);
+    }
+    while (advancedReader->Rewind() > 0)
+    {
+    }
+
+    /*
      * Test basic buffer writer.
      */
 
     // Create a buffer writer.
     std::shared_ptr<twio::BufferOutputStream> outputStream = twio::BufferOutputStream::New();
-    std::shared_ptr<twio::Writer> writer = twio::Writer::New(outputStream);
+    writer = twio::Writer::New(outputStream);
 
     // Since the advanced reader is rewind to the beginning, we can wire it
     // to the writer using a printer.
@@ -91,7 +107,7 @@ int main()
 
     printer->Print();
 
-    twio::UnwrapStream(writer->Stream(), finalBuffer);
+    UnwrapStream(writer->Stream(), finalBuffer);
     // Notice that, after unwrap, the writer will also be unable to write.
     // writer->WriteFormat("This will cause an error!\n");
 
@@ -101,6 +117,7 @@ int main()
 
     return 0;
 }
+
 
 void memory_test()
 {
