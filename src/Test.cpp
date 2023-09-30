@@ -44,12 +44,25 @@ int main()
 
 
     /*
+     * Test Read line.
+     */
+    char buffer[64];
+    auto writer = twio::Writer::New(twio::FileOutputStream::New(stdout, false));
+    while (advancedReader->ReadLine(buffer))
+    {
+        writer->WriteFormat("%s\n", buffer);
+    }
+    while (advancedReader->Rewind() > 0)
+    {
+    }
+
+    /*
      * Test basic buffer writer.
      */
 
     // Create a buffer writer.
     std::shared_ptr<twio::BufferOutputStream> outputStream = twio::BufferOutputStream::New();
-    std::shared_ptr<twio::Writer> writer = twio::Writer::New(outputStream);
+    writer = twio::Writer::New(outputStream);
 
     // Since the advanced reader is rewind to the beginning, we can wire it
     // to the writer using a printer.

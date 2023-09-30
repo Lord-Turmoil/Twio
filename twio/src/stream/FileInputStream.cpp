@@ -90,7 +90,20 @@ bool FileInputStream::IsReady() const
 
 bool FileInputStream::HasNext() const
 {
-    return IsReady() && !feof(_fp);
+    if (!IsReady())
+    {
+        return false;
+    }
+
+    const int ch = fgetc(_fp);
+    if (ch == EOF)
+    {
+        return false;
+    }
+
+    TWIO_ASSERT(ungetc(ch, _fp) != EOF);
+
+    return true;
 }
 
 
