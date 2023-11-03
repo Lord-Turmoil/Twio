@@ -3,7 +3,6 @@
 #include <twio.h>
 
 const char BUFFER[] = "ABC\nDEFGHI\nJKLMNOPQR\nSTUVWXYZ\n";
-char finalBuffer[32];
 
 void memory_test();
 void console_test();
@@ -107,11 +106,11 @@ int main()
 
     printer->Print();
 
-    UnwrapStream(writer->Stream(), finalBuffer);
+    const auto finalBuffer = UnwrapStream(writer->Stream());
     // Notice that, after unwrap, the writer will also be unable to write.
     // writer->WriteFormat("This will cause an error!\n");
 
-    assert(strcmp(finalBuffer, BUFFER) == 0);
+    assert(strcmp(finalBuffer.get(), BUFFER) == 0);
 
     printf("Congratulations! Everything is OK!\n");
 
