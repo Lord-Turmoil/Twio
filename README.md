@@ -199,19 +199,19 @@ auto reader = twio::Reader::New(stream);
 
 ### 3.3 Unwrapper
 
-Similar to redirect, you can also unwrap an output stream to a raw buffer. You should provide the `buffer`, and make sure it has sufficient space.
+Similar to redirect, you can also unwrap an output stream to a raw buffer. It will simple return the buffer pointer to you with `unique_ptr` wrapper.
 
 ```cpp
-void UnwrapStream(const IOutputStreamPtr& stream, char* buffer)
+std::unique_ptr<char[]> UnwrapStream(const IOutputStreamPtr& stream);
 ```
 
 For example, you can take the output buffer of a writer to a raw buffer.
 
 ```cpp
-twio::UnwrapStream(writer->Stream(), finalBuffer);
+auto buffer = twio::UnwrapStream(writer->Stream());
 ```
 
-> The writer will also be invalid after unwrap!
+> The writer will also be **invalid** after unwrap!
 
 ---
 
